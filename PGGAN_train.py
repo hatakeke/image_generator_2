@@ -72,7 +72,7 @@ if __name__ == '__main__':
 	z0 = torch.clamp(z0, -1.,1.)
 	#学習は合計res_step*8回行う
 	#res_step回繰り返すごとに解像度が高まっていく
-	while(iteration<res_step*8):
+	while(iteration<res_step*10):
 		#学習が終わりに近づいてきたら学習率を下げる
 		if iteration==res_step*7.5:
 			optG.param_groups[0]['lr'] = 0.0001
@@ -158,7 +158,7 @@ if __name__ == '__main__':
 			#イテレーションをカウント
 			iteration += 1
 
-			if (iteration%500==0 or iteration==res_step*8):
+			if (iteration%500==0 or iteration==res_step*10):
 				#画像の出力を行う
 				netG_mavg.eval()
 				#ノイズを入力して16枚画像を生成
@@ -196,7 +196,7 @@ if __name__ == '__main__':
 
 			#学習が終わるとループを抜けるが、その際にlossのグラフを出力する
 			#学習済みモデルの出力も行う
-			if iteration == res_step*8:
+			if iteration == res_step*10:
 				#lossのグラフを出力する
 				losses_ = np.array(losses)
 				niter = losses_.shape[0]//100*100
